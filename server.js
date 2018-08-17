@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const passport = require("passport");
 const dbConnect = require("./mongodbConnect");
 
 const users = require("./routes/api/users");
@@ -14,6 +14,11 @@ app.use(bodyParser.json());
 app.get("/", (req, res) => {
   res.send("hello ");
 });
+
+//passport middleware
+app.use(passport.initialize());
+//passport config
+require("./config/passport.js")(passport);
 
 //use routes
 app.use("/api/users", users);
