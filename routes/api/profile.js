@@ -243,11 +243,12 @@ router.delete(
       .then(profile => {
         if (profile) {
           //get index of exp id
-
+          //console.log(" experiance : " + JSON.stringify(profile.experience));
           const removeIndex = profile.experience
-            .map(item => item.id) //maps the array elements by ids
+            .map(item => item._id.toString()) //maps the array elements by ids
             .indexOf(req.params.exp_id); // get the index of experiance id
 
+          //console.log(" experiance remove index: " + removeIndex);
           //splice oit of array
           profile.experience.splice(removeIndex, 1);
           profile
