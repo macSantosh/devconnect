@@ -43,7 +43,7 @@ router.post(
     //check validation
     const { errors, isValid } = validateProfileInput(req.body);
     if (!isValid) {
-      res.status(400).json(errors);
+      return res.status(400).json(errors);
     }
 
     //Get fields
@@ -171,7 +171,7 @@ router.post(
     //validate input data
     const { errors, isValid } = validateExperianceInput(req.body);
     if (!isValid) {
-      res.status(400).send(errors);
+      return res.status(400).send(errors);
     }
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {

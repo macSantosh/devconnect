@@ -11,14 +11,14 @@ const validateLoginInput = require("../../validation/login");
 //load user model
 const User = require("../../models/User");
 
-//@route GET api/users/register
+//@route POST api/users/register
 //@desc Regsiter the user
 //@access Public
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
   //check validation
   if (!isValid) {
-    res.status(400).json(errors);
+    return res.status(400).json(errors);
   }
 
   User.findOne({
@@ -78,7 +78,7 @@ router.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
   //check validation
   if (!isValid) {
-    res.status(400).json(errors);
+    return res.status(400).json(errors);
   }
 
   const email = req.body.email;
