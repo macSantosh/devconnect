@@ -5,8 +5,6 @@ const initialState = {};
 const errorReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ERRORS:
-      console.log(action.payload);
-      console.log(action.payload.errors);
       return action.payload;
 
     default:
