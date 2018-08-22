@@ -19,7 +19,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const errors = {};
-    console.log("found user:  " + req.user.id + " name:" + req.user.name);
+    //console.log("found user:  " + req.user.id + " name:" + req.user.name);
     Profile.findOne({ user: req.user.id })
       .populate("user", ["name", "avatar"]) //get user details for forign key
       .then(profile => {

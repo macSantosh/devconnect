@@ -12,7 +12,7 @@ class Navbar extends Component {
     this.props.logoutUser();
     //window.location.href = "/"; //why doesnot this works
     //<Redirect to="/" />;
-    this.props.history.push("/");
+    // this.props.history.push("/");
   }
 
   render() {

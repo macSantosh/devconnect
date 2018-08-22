@@ -9,10 +9,11 @@ module.exports = function validateProfileInput(data) {
   data.status = isEmpty(data.status) ? "" : data.status;
   data.skills = isEmpty(data.skills) ? "" : data.skills;
 
+  //console.log("facebook :" + JSON.stringify(data));
   if (validator.isEmpty(data.handle)) {
-    errors.hanfle = "Profile handle is required";
+    errors.handle = "Profile handle is required";
   } else if (!validator.isLength(data.handle, { min: 2, max: 40 })) {
-    errors.hanfle = "Handle needs to be between 2 and 40 characters long";
+    errors.handle = "Handle needs to be between 2 and 40 characters long";
   }
   if (validator.isEmpty(data.status)) {
     errors.status = "Status field is required";
@@ -32,14 +33,14 @@ module.exports = function validateProfileInput(data) {
   if (!isEmpty(data.facebook) && !validator.isURL(data.facebook)) {
     errors.facebook = "Not a valid URL";
   }
-  console.log("facebook :" + data.facebook);
+
   if (!isEmpty(data.linkedin) && !validator.isURL(data.linkedin)) {
     errors.linkedin = "Not a valid URL";
   }
   if (!isEmpty(data.instagram) && !validator.isURL(data.instagram)) {
     errors.instagram = "Not a valid URL";
   }
-
+  //console.log("facebook :" + JSON.stringify(errors));
   return {
     errors,
     isValid: isEmpty(errors)
