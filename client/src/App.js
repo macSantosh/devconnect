@@ -14,7 +14,10 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/create-profile/CreateProfile";
+import EditProfile from "./components/edit-profile/EditProfile";
+import AddExperiance from "./components/add-credentials/AddExperiance";
 import PrivateRoute from "./components/common/PrivateRoute";
+import AddEducation from "./components/add-credentials/AddEducation";
 
 if (localStorage.jwtAuthToken) {
   setAuthToken(localStorage.jwtAuthToken);
@@ -26,8 +29,11 @@ if (localStorage.jwtAuthToken) {
   //   type: SET_CURRENT_USER,
   //   payload: decodedUser
   // });
-  const currentTimeinMs = Date.now / 1000;
+
+  const currentTimeinMs = Date.now() / 1000; //convert milliseconds to macroseconds
+
   if (decodedUser.exp < currentTimeinMs) {
+    console.log("token expired");
     //logout user
     store.dispatch(logoutUser());
     //clear current profile
@@ -56,6 +62,21 @@ class App extends Component {
                   exact
                   path="/create-profile"
                   component={CreateProfile}
+                />
+                <PrivateRoute
+                  exact
+                  path="/edit-profile"
+                  component={EditProfile}
+                />
+                <PrivateRoute
+                  exact
+                  path="/add-experiance"
+                  component={AddExperiance}
+                />
+                <PrivateRoute
+                  exact
+                  path="/add-education"
+                  component={AddEducation}
                 />
               </Switch>
             </div>
