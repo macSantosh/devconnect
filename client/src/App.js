@@ -18,6 +18,11 @@ import EditProfile from "./components/edit-profile/EditProfile";
 import AddExperiance from "./components/add-credentials/AddExperiance";
 import PrivateRoute from "./components/common/PrivateRoute";
 import AddEducation from "./components/add-credentials/AddEducation";
+import ProfileList from "./components/profiles/ProfileList";
+import Profile from "./components/profile/Profile";
+import Posts from "./components/post/Posts";
+import Post from "./components/postComment/Post";
+import PageNotFound from "./components/not-found/PageNotFound";
 
 if (localStorage.jwtAuthToken) {
   setAuthToken(localStorage.jwtAuthToken);
@@ -56,6 +61,10 @@ class App extends Component {
             <div className="container">
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/profiles" component={ProfileList} />
+              <Route exact path="/profile/:handle" component={Profile} />
+              <Route path="/not-found" component={PageNotFound} />
+
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 <PrivateRoute
@@ -78,6 +87,8 @@ class App extends Component {
                   path="/add-education"
                   component={AddEducation}
                 />
+                <PrivateRoute exact path="/post-feed" component={Posts} />
+                <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
             </div>
 

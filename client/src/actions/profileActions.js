@@ -4,7 +4,8 @@ import {
   GET_PROFILE,
   CLEAR_PROFILE,
   GET_ERRORS,
-  SET_CURRENT_USER
+  SET_CURRENT_USER,
+  GET_PROFILES
 } from "./types";
 
 //get profile for logged in user
@@ -129,6 +130,48 @@ export const deleteEducation = eduId => dispatch => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
+      });
+    });
+};
+
+//getAllProfiles
+export const getProfiles = () => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get("api/profile/all")
+    .then(res => {
+      dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_PROFILES,
+        payload: null
+      });
+    });
+};
+
+//Get profile by handle
+export const getProfileByHandle = handle => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/handle/${handle}`)
+    .then(res => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: {} //added by me to reset errors
+      });
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: GET_PROFILE,
+        payload: {}
       });
     });
 };

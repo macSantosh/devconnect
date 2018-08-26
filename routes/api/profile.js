@@ -45,7 +45,6 @@ router.post(
     if (!isValid) {
       return res.status(400).json(errors);
     }
-
     //Get fields
     const profileFields = {};
     profileFields.user = req.user.id;
@@ -70,6 +69,8 @@ router.post(
     if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
     if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
     if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
+
+    //console.log(JSON.stringify(profileFields));
 
     Profile.findOne({ user: req.user.id })
       .then(profile => {
@@ -104,6 +105,7 @@ router.get("/handle/:handle", (req, res) => {
   const errors = {};
   //todo: tye to change req.query.params
   Profile.findOne({ handle: req.params.handle })
+    .populate("user", ["name", "avatar"])
     .then(profile => {
       if (!profile) {
         errors.noprofile = "there is no profile for this user";

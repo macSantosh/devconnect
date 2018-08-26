@@ -38,6 +38,7 @@ class Dashboard extends Component {
             <ProfileActionsComponent />
             {/* TODO: Experiance and Education*/}
             <Experience experience={profile.experience} />
+
             <Education education={profile.education} />
 
             <div style={{ marginBottom: "60px" }}>

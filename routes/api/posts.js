@@ -45,7 +45,7 @@ router.get("/", (req, res) => {
       }
     })
     .catch(err =>
-      res.status(404).send({ nopostsfound: "no post forund for this id" })
+      res.status(404).send({ nopostsfound: "no post found for this id" })
     );
 });
 
@@ -111,14 +111,14 @@ router.post(
                   .length > 0
               ) {
                 //if user has already liked the post
-                res
+                return res
                   .status(400)
                   .json({ alreadyLiked: "User already liked this post" });
               }
               post.likes.unshift({ user: req.user.id });
               post.save().then(post => res.json(post)); //save post
             } else {
-              res
+              return res
                 .status(404)
                 .json({ nopostfound: "no post foudn for this id" });
             }
